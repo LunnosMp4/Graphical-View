@@ -1,0 +1,54 @@
+{
+  "name": "graphical-view",
+  "displayName": "Graphical View",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:graphical-view.showWebView",
+    "onCommand:graphical-view.manageWebView"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "graphical-view.showWebView",
+        "title": "Show WebView"
+      },
+      {
+        "command": "graphical-view.manageWebView",
+        "title": "Manage Groups in WebView"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "@vscode/test-electron": "^2.2.0",
+    "eslint": "^8.28.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.1.0",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "html-to-text": "^9.0.3",
+    "path": "^0.12.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LunnosMp4/Graphical-View"
+  }
+}
