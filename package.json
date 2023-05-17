@@ -1,8 +1,11 @@
 {
   "name": "graphical-view",
   "displayName": "Graphical View",
-  "description": "",
-  "version": "0.0.1",
+  "description": "Graphical view of the files in the current workspace",
+  "icon": "GraphicalViewLogo.png",
+  "version": "0.0.2",
+  "publisher": "Lunnos",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.74.0"
   },
