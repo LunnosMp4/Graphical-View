@@ -3,7 +3,7 @@
   "displayName": "Graphical View",
   "description": "Graphical view of the files in the current workspace",
   "icon": "GraphicalViewLogo.png",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "Lunnos",
   "license": "MIT",
   "engines": {
