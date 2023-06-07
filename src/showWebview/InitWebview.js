@@ -13,6 +13,11 @@ async function getFilenames() {
     return [filenames, filteredFiles];
 }
 
+function getFileFolder(filename) {
+    let parts = filename.split("/");
+    return parts[parts.length - 2];
+}
+
 function getFileType(filename) {
     let parts = filename.split(".");
     return parts[parts.length - 1];
@@ -109,6 +114,45 @@ function createLinks(nodes, groups) {
         }
     }
     return links;
+}
+
+function createforceGraph(nodes, links) {
+    const elem = document.getElementById('root');
+    const Graph = ForceGraph2D()(elem)
+        .graphData({nodes, links})
+        .nodeLabel('name')
+        .nodeColor(node => node.color)
+        .nodeCanvasObjectMode(() => 'before')
+        .nodeCanvasObject((node, ctx, globalScale) => {
+            const label = node.name;
+            const fontSize = 12/globalScale;
+            ctx.font = `${fontSize}px Sans-Serif`;
+            const textWidth = ctx.measureText(label).width;
+            const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.2); // some padding
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.fillRect(node.x - bckgDimensions[0] / 2, node.y - bckgDimensions[1] / 2, ...bckgDimensions);
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = node.color;
+            ctx.fillText(label, node.x, node.y);
+        })
+        .linkColor(() => 'rgba(255, 255, 255, 0.2)')
+        .linkWidth(1)
+        .linkDirectionalParticles(2)
+        .linkDirectionalParticleWidth(2)
+        .linkDirectionalParticleSpeed(0.005)
+        .linkDirectionalParticleColor(() => '#ffffff')
+        .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
+        .onNodeClick(node => {
+            if (node && node.path) {
+                vscode.workspace.openTextDocument(node.path).then(doc => {
+                    vscode.window.showTextDocument(doc);
+                });
+            }
+        });
+    return Graph;
 }
 
 async function initWebview() {
